@@ -84,6 +84,7 @@ input, select, textarea {
 
 	body {
 		background: #fff;
+		background-color: var(--third-color);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -112,6 +113,7 @@ input, select, textarea {
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		border-bottom: solid 1px #e4e4e4;
 		color: inherit;
+		color: var(--main-color);
 		text-decoration: none;
 	}
 
@@ -2814,6 +2816,10 @@ input, select, textarea {
 					#header > nav ul li:first-child {
 						border-top: 0;
 					}
+
+	.header-title {
+		text-align: center;
+	}
 
 /* Wrapper */
 
