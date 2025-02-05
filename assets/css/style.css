@@ -30,12 +30,7 @@
     scroll-behavior: smooth;
     overflow-y: scroll;
   }
-  
-  body {
-    scroll-snap-align: start;
-    position: relative;
-  }
-  
+
   .container-fluid {
     scroll-snap-align: start;
     scroll-snap-stop: always;
