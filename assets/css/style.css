@@ -26,11 +26,6 @@
   font-family: "PT-Sans-Italic";
   src: url(../fonts/PT_Sans-Web-Italic.ttf); }
 
-  html {
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-  }
-
   .container-fluid {
     scroll-snap-align: start;
     scroll-snap-stop: always;
