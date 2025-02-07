@@ -73,7 +73,19 @@ jQuery(document).ready(function(){
   }
   );
 
-
+  $('.portfolio-card').click(function(){
+    const imgSrc = $(this).find('.card-img').attr('src');
+    const title = $(this).find('.card-title').text();
+    const category = $(this).find('.card-text').text();
+    const description = $(this).data('description');
+    
+    $('#enlargedImage').attr('src', imgSrc);
+    $('#modalTitle').text(title);
+    $('#modalCategory').text(category);
+    $('#modalDescription').html(description);
+    
+    $('#portfolioModal').modal('show');
+  });
 
 });
 
