@@ -29,7 +29,6 @@
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
   }
   
   body {
@@ -112,7 +111,9 @@ h2 {
 .fh5co-home-banner {
   padding: 0; }
   .fh5co-home-banner .card {
-    border: none; }
+    border: none;
+    overflow: hidden;  /* Ensure the scaled image doesn't overflow */
+  }
   .fh5co-home-banner h2 {
     font-size: 52px;
     color: #fff;
@@ -168,6 +169,35 @@ h2 {
   .card img.card-img {
     max-width: 100%; 
     height: 25%;
+  }
+}
+
+.fh5co-home-banner .card-img {
+  animation: 
+    slowZoom 5s ease-in-out infinite alternate,
+    gentlePan 10s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+/* Optional - add a subtle side-to-side movement */
+@keyframes gentlePan {
+  0% {
+    transform: scale(1.2) translateX(0);
+  }
+  50% {
+    transform: scale(1.3) translateX(-30px);
+  }
+  100% {
+    transform: scale(1.3) translateX(0);
   }
 }
 
@@ -920,4 +950,3 @@ footer {
     background-color: var(--fourth-color) !important;
     border-color: var(--fourth-color) !important;
 }
-
