@@ -1047,7 +1047,7 @@ footer {
 
 .nav-list {
   list-style: none;
-  display: flex;
+  display: flex;  
   justify-content: center;
   align-items: center;
   gap: 40px;
@@ -1138,17 +1138,29 @@ footer {
   display: flex;
   padding: 0;
   height: 600px;
+  overflow: hidden; /* Prevent scrollbars during drag */
 }
 
 .modal-image-container {
   width: 50%;
   overflow: hidden;
+  cursor: move; /* Show move cursor */
 }
 
 #enlargedImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  user-select: none; /* Prevent image dragging */
+  -webkit-user-drag: none;
+  transform-origin: center;
+  cursor: zoom-in;
+}
+
+#enlargedImage.zoomed {
+  cursor: move;
+  transform: scale(2);
 }
 
 .modal-project-info {
@@ -1166,6 +1178,29 @@ footer {
 }
 
 .project-description {
-  margin-top: 20px;
+  margin-top: 5px;
   line-height: 1.6;
+  color: #fff;
+}
+.modal-project-info .project-description {
+  text-align: justify;
+  line-height: 1.6;
+  white-space: pre-line;
+  padding: 5px;
+}
+
+.zoom-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.zoomable-image {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.zoomed {
+  transform: scale(2);
+  cursor: zoom-out;
 }
