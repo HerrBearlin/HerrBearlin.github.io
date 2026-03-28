@@ -612,10 +612,10 @@ h2 {
     margin-bottom: 0;
     box-shadow: 0px 10px 21px 0px rgba(0, 0, 0, 0.2); }
     .activity .card .card-img-overlay {
-      background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
-      background: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
-      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
-      background: -ms-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)); }
+      background: -webkit-linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75));
+      background: -moz-linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75));
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75));
+      background: -ms-linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)); }
     .activity .card.active, .activity .card:hover {
       transform: none;
       box-shadow: none; }
@@ -1258,5 +1258,87 @@ footer {
   .tool-card {
       width: 60px;
       height: 60px;
+  }
+}
+
+/* Skill Tier Sections */
+.skill-tier {
+  margin-bottom: 36px;
+}
+
+.skill-tier-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.skill-tier-label {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 24px;
+  border-radius: 20px;
+}
+
+.skill-tier-label.advanced {
+  color: #f7a204;
+  border: 1px solid #f7a204;
+  background: rgba(247, 162, 4, 0.1);
+}
+
+.skill-tier-label.intermediate {
+  color: #7eb8e8;
+  border: 1px solid #7eb8e8;
+  background: rgba(126, 184, 232, 0.1);
+}
+
+.skill-tier-label.beginner {
+  color: #7ec87e;
+  border: 1px solid #7ec87e;
+  background: rgba(126, 200, 126, 0.1);
+}
+
+.tool-badge {
+  height: 80px;
+  padding: 8px 14px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  min-width: 80px;
+  line-height: 1.3;
+}
+
+.tool-badge:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.visit-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 159, 28, 0.9);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .tool-badge {
+    font-size: 0.72rem;
+    min-width: 70px;
+    height: 60px;
+    padding: 6px 10px;
   }
 }

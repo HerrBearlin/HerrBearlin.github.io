@@ -73,21 +73,29 @@ jQuery(document).ready(function(){
   }
   );
 
-  $('.portfolio-card').click(function(){
-    const imgSrc = $(this).find('.card-img').attr('src');
-    const title = $(this).find('.card-title').text();
-    const category = $(this).find('.card-text').text();
-    const description = $(this).data('description');
-    
+  function openPortfolioModal($card, description) {
+    const imgSrc = $card.find('.card-img').attr('src');
+    const title = $card.find('.card-title').text();
+    const category = $card.find('.card-text').text();
+
     $('#enlargedImage').attr('src', imgSrc);
     $('#modalTitle').text(title);
     $('#modalCategory').text(category);
     $('#modalDescription').html(description);
-    
-    // Reset zoom state when opening modal
+
     $('#enlargedImage').removeClass('zoomed');
-    
+
     $('#portfolioModal').modal('show');
+  }
+
+  $('.portfolio-card').click(function(){
+    openPortfolioModal($(this), $(this).data('description'));
+  });
+
+  $(document).on('click', '.open-portfolio-modal', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openPortfolioModal($(this).closest('.card'), $(this).data('description'));
   });
 
 });
