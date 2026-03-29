@@ -77,11 +77,14 @@ jQuery(document).ready(function(){
     const imgSrc = $card.find('.card-img').attr('src');
     const title = $card.find('.card-title').text();
     const category = $card.find('.card-text').text();
+    const normalizedDescription = typeof description === 'string'
+      ? description.replace(/>\s+</g, '><').trim()
+      : description;
 
     $('#enlargedImage').attr('src', imgSrc);
     $('#modalTitle').text(title);
     $('#modalCategory').text(category);
-    $('#modalDescription').html(description);
+    $('#modalDescription').html(normalizedDescription);
 
     $('#enlargedImage').removeClass('zoomed');
 
