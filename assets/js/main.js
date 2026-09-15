@@ -93,11 +93,11 @@ jQuery(document).ready(function() {
         { label: 'Role', value: 'Game Design Consultant' },
         { label: 'Focus', value: 'Live Ops, Progression, Economy' },
         { label: 'Scale', value: '37M Visits' },
-        { label: 'Format', value: 'Professional case study' }
+        { label: 'User Rating', value: '95%' }
       ],
       links: [
         { label: 'Play Game', href: 'https://www.roblox.com/games/112781315318195/Pull-a-Lucky-Fish' },
-        { label: 'Watch Video', href: 'https://www.youtube.com/watch?v=Z3fYOxb-2pM' }
+        { label: 'Watch Video', href: 'https://youtu.be/Z3fYOxb-2pM?t=310' }
       ],
       media: [
         {
@@ -186,7 +186,7 @@ jQuery(document).ready(function() {
       html += '<div class="case-study-meta-item"><span>' + item.label + '</span><strong>' + item.value + '</strong></div>';
     });
 
-    $('#modalMeta').html(html);
+    return html;
   }
 
   function renderLinks(links) {
@@ -200,81 +200,92 @@ jQuery(document).ready(function() {
       html += '<a class="case-study-link" href="' + link.href + '" target="_blank" rel="noopener noreferrer">' + link.label + '</a>';
     });
 
-    $('#modalLinks').html(html);
+    return html;
   }
 
-  function setActivePanel(panelName) {
-    $('.case-study-tab').removeClass('is-active');
-    $('.case-study-panel').removeClass('is-active');
-    $('.case-study-tab[data-panel="' + panelName + '"]').addClass('is-active');
-    $('.case-study-panel[data-panel="' + panelName + '"]').addClass('is-active');
-  }
+  // Panels removed for simplified modal — no-op placeholder
+  function setActivePanel(panelName) {}
 
-  function setActiveMedia(index) {
-    if (!currentCaseStudy || !currentCaseStudy.media || !currentCaseStudy.media[index]) {
-      return;
-    }
+  // Media stage removed — keep placeholder
+  function setActiveMedia(index) {}
 
-    var item = currentCaseStudy.media[index];
-    var $stage = $('#modalMediaStage');
-    var $image = $('#modalStageImage');
-    var $embed = $('#modalStageEmbed');
-
-    $('.case-study-media-button').removeClass('is-active');
-    $('.case-study-media-button[data-media-index="' + index + '"]').addClass('is-active');
-    $('#modalStageCaption').text(item.caption || '');
-
-    if (item.type === 'embed') {
-      $stage.removeClass('is-image').addClass('is-embed');
-      $image.attr('src', '').attr('alt', '');
-      $embed.attr('src', item.src || 'about:blank');
-    } else {
-      $stage.removeClass('is-embed').addClass('is-image');
-      $embed.attr('src', 'about:blank');
-      $image.attr('src', item.src || '').attr('alt', item.alt || currentCaseStudy.title || '');
-    }
-  }
-
-  function renderMedia(media) {
-    var html = '';
-    var items = media || [];
-
-    if (!items.length) {
-      $('#modalMediaStrip').html('');
-      $('#modalMediaStage').removeClass('is-embed').addClass('is-image');
-      $('#modalStageImage').attr('src', '').attr('alt', '');
-      $('#modalStageEmbed').attr('src', 'about:blank');
-      $('#modalStageCaption').text('');
-      return;
-    }
-
-    $.each(items, function(index, item) {
-      html += '<button type="button" class="case-study-media-button' + (index === 0 ? ' is-active' : '') + '" data-media-index="' + index + '">';
-      html += '<span class="case-study-media-label">' + item.label + '</span>';
-      html += '<span class="case-study-media-type">' + item.assetType + '</span>';
-      html += '</button>';
-    });
-
-    $('#modalMediaStrip').html(html);
-    setActiveMedia(0);
-  }
+  // renderMedia removed for simplified modal
 
   function renderStudy(study) {
     currentCaseStudy = study;
 
-    $('#modalEyebrow').text(study.eyebrow || 'Case Study');
     $('#modalTitle').text(study.title || 'Project');
     $('#modalCategory').text(study.category || '');
-    $('#modalSummary').html(study.summaryHtml || '');
-    $('#modalOverview').html((study.tabs && study.tabs.overview) || '');
-    $('#modalGallery').html((study.tabs && study.tabs.gallery) || '');
-    $('#modalDocs').html((study.tabs && study.tabs.docs) || '');
-    $('#modalProcess').html((study.tabs && study.tabs.process) || '');
 
-    renderMeta(study.meta || []);
-    renderLinks(study.links || []);
-    renderMedia(study.media || []);
-    setActivePanel('overview');
+    var metaHtml = renderMeta(study.meta || []);
+
+    var responsibilitiesHtml = '';
+    try {
+      var procHtml = (study.tabs && study.tabs.process) || '';
+      var $tmp = $('<div>').html(procHtml);
+      var $firstUl = $tmp.find('ul').first();
+      if ($firstUl.length) {
+        var items = [];
+        $firstUl.find('li').each(function(i) { if (i < 6) items.push($(this).text()); });
+        if (items.length) {
+          responsibilitiesHtml = '<div class="case-study-responsibilities"><ul>';
+          items.forEach(function(it) { responsibilitiesHtml += '<li>' + it + '</li>'; });
+          responsibilitiesHtml += '</ul>';
+        }
+      }
+    } catch (e) {
+      responsibilitiesHtml = '';
+    }
+
+    var primaryHtml = '';
+    (study.links || []).forEach(function(link) {
+      var label = (link.label || '').toLowerCase();
+      if (label.indexOf('play') !== -1 || label.indexOf('watch') !== -1 || label.indexOf('video') !== -1) {
+        primaryHtml += '<a class="case-study-link case-study-primary-btn" href="' + link.href + '" target="_blank" rel="noopener noreferrer">' + link.label + '</a>';
+      }
+    });
+
+    var mediaActionsHtml = '';
+    (study.media || []).forEach(function(item, idx) {
+      var label = (item.label || '').toLowerCase();
+      if (label.indexOf('design snapshot') !== -1 || item.assetType === 'process') {
+        mediaActionsHtml += '<button type="button" class="case-study-secondary-btn case-study-media-action" data-media-index="' + idx + '">Design Snapshot</button>';
+      }
+      if (item.type === 'embed' || label.indexOf('doc') !== -1 || label.indexOf('scroll') !== -1) {
+        mediaActionsHtml += '<button type="button" class="case-study-secondary-btn case-study-media-action" data-media-index="' + idx + '">Open Doc</button>';
+      }
+    });
+
+    var combinedHtml = '';
+    var detailHtml = '';
+
+    combinedHtml += metaHtml;
+
+    if (responsibilitiesHtml) {
+      detailHtml += responsibilitiesHtml;
+    }
+
+    if (primaryHtml || mediaActionsHtml) {
+      detailHtml += '<div class="case-study-actions">';
+      if (primaryHtml) detailHtml += '<div class="case-study-primary-links">' + primaryHtml + '</div>';
+      if (mediaActionsHtml) detailHtml += '<div class="case-study-media-actions">' + mediaActionsHtml + '</div>';
+      detailHtml += '</div>';
+    }
+
+    if (detailHtml) {
+      combinedHtml += '<div class="case-study-detail-row">' + detailHtml + '</div>';
+    }
+
+    $('#modalMeta').html(combinedHtml);
+
+    // Wire media action clicks: open the referenced media in a new tab
+    $(document).off('click', '.case-study-media-action').on('click', '.case-study-media-action', function() {
+      var mi = Number($(this).data('mediaIndex'));
+      var item = (currentCaseStudy && currentCaseStudy.media && currentCaseStudy.media[mi]) || null;
+      if (item && item.src) {
+        window.open(item.src, '_blank');
+      }
+    });
   }
 
   function openPortfolioModal($card, description, caseStudyKey) {
@@ -301,16 +312,8 @@ jQuery(document).ready(function() {
     );
   });
 
-  $(document).on('click', '.case-study-tab', function() {
-    setActivePanel($(this).data('panel'));
-  });
-
-  $(document).on('click', '.case-study-media-button, .case-study-inline-action[data-media-index]', function() {
-    setActiveMedia(Number($(this).data('mediaIndex')));
-  });
-
+  // Tabs and media-strip removed for simplified modal — no handlers needed
   $('#portfolioModal').on('hidden.bs.modal', function() {
-    $('#modalStageEmbed').attr('src', 'about:blank');
     currentCaseStudy = null;
   });
 });

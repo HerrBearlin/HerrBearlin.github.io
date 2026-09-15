@@ -645,42 +645,15 @@
 
   <!-- Add modal at the end of body -->
   <div class="modal fade case-study-modal" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-        <div class="modal-header case-study-header">
-          <div class="case-study-heading">
-            <p id="modalEyebrow" class="case-study-eyebrow">Case Study</p>
+        <div class="modal-body case-study-body">
+          <button type="button" class="close case-study-close" data-dismiss="modal" aria-label="Close">&times;</button>
+          <div class="case-study-copy">
             <h2 id="modalTitle"></h2>
             <p id="modalCategory" class="case-study-category"></p>
           </div>
-          <button type="button" class="close case-study-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body case-study-body">
-          <div class="case-study-stage-shell">
-            <div class="case-study-stage" id="modalMediaStage">
-              <img id="modalStageImage" src="" alt="">
-              <iframe id="modalStageEmbed" src="" title="Case study document preview" loading="lazy"></iframe>
-            </div>
-            <div id="modalStageCaption" class="case-study-stage-caption"></div>
-            <div id="modalMediaStrip" class="case-study-media-strip"></div>
-          </div>
-          <aside class="case-study-sidebar">
-            <div id="modalSummary" class="case-study-summary"></div>
-            <div id="modalMeta" class="case-study-meta"></div>
-            <div id="modalLinks" class="case-study-links"></div>
-          </aside>
-          <div class="case-study-tabs" role="tablist" aria-label="Case study sections">
-            <button type="button" class="case-study-tab is-active" data-panel="overview">Overview</button>
-            <button type="button" class="case-study-tab" data-panel="gallery">Gallery</button>
-            <button type="button" class="case-study-tab" data-panel="docs">Docs</button>
-            <button type="button" class="case-study-tab" data-panel="process">Process</button>
-          </div>
-          <div id="modalOverview" class="case-study-panel is-active" data-panel="overview"></div>
-          <div id="modalGallery" class="case-study-panel" data-panel="gallery"></div>
-          <div id="modalDocs" class="case-study-panel" data-panel="docs"></div>
-          <div id="modalProcess" class="case-study-panel" data-panel="process"></div>
+          <div id="modalMeta" class="case-study-meta case-study-meta-panel"></div>
         </div>
       </div>
     </div>
