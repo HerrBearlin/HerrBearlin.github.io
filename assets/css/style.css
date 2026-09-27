@@ -1333,10 +1333,28 @@ footer {
   align-content: start;
 }
 
+.case-study-meta-panel .case-study-intro,
 .case-study-meta-panel .case-study-detail-row,
 .case-study-meta-panel .case-study-responsibilities,
 .case-study-meta-panel .case-study-actions {
   grid-column: 1 / -1;
+}
+
+/* Cover for game cards that have no image (see games.js) */
+.game-no-image {
+  width: 100%;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(247, 162, 4, 0.35), transparent 55%),
+    linear-gradient(135deg, #5c281d 0%, #2d1410 100%);
+}
+
+.case-study-intro p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.case-study-intro p:last-child {
+  margin-bottom: 0;
 }
 
 .case-study-detail-row {
@@ -1423,6 +1441,16 @@ footer {
   background: transparent;
   color: #fff4e6;
   font-weight: 700;
+}
+
+a.case-study-secondary-btn {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+a.case-study-secondary-btn:hover {
+  color: #fff4e6;
+  text-decoration: none;
 }
 
 .case-study-secondary-btn:hover {
@@ -1830,5 +1858,336 @@ footer {
   .button-group .btn {
     font-size: 0.7rem;
     padding: 0.35rem 0.6rem;
+  }
+}
+/* ============================================================
+   ALL GAMES PAGE
+   ============================================================ */
+.all-games-page {
+  background-color: var(--main-color);
+  padding: 60px 0 70px;
+}
+
+.all-games-heading {
+  color: var(--header-color);
+  margin-bottom: 36px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--header-color);
+}
+
+.all-games-accent {
+  display: inline-block;
+  width: 10px;
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background-color: var(--header-color);
+}
+
+.all-games-card {
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.all-games-card .card-img-overlay {
+  background: none;
+}
+
+.all-games-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.all-games-button {
+  display: inline-block;
+  padding: 14px 44px;
+  border: 2px solid var(--header-color);
+  border-radius: 8px;
+  background-color: var(--header-color);
+  color: var(--main-color);
+  font-family: "PT-Sans-Bold";
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.all-games-button:hover {
+  background-color: #ff9500;
+  border-color: #ff9500;
+  color: var(--main-color);
+  text-decoration: none;
+  transform: scale(1.05);
+}
+
+.all-games-button-outline {
+  background-color: transparent;
+  color: var(--header-color);
+}
+
+.all-games-button-outline:hover {
+  background-color: rgba(247, 162, 4, 0.12);
+  border-color: var(--header-color);
+  color: var(--header-color);
+}
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.contact-page {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(247, 162, 4, 0.14), transparent 45%),
+    radial-gradient(circle at 90% 100%, rgba(92, 40, 29, 0.9), transparent 55%),
+    var(--main-color);
+  padding: 70px 0 60px;
+  color: #f7efe8;
+}
+
+.contact-intro {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.contact-eyebrow {
+  margin-bottom: 10px;
+  color: var(--header-color);
+  font-family: "PT-Sans-Bold";
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.contact-intro h1 {
+  margin-bottom: 16px;
+  color: #fff4e6;
+  font-size: 2.6rem;
+  line-height: 1.15;
+}
+
+.contact-intro p {
+  margin: 0;
+  color: rgba(247, 239, 232, 0.8);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contact-card {
+  height: 100%;
+  padding: 32px;
+  border: 1px solid rgba(247, 162, 4, 0.18);
+  border-radius: 18px;
+  background: rgba(37, 17, 13, 0.75);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.contact-card h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 26px;
+  color: var(--header-color);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.contact-accent {
+  display: inline-block;
+  width: 8px;
+  height: 24px;
+  margin-right: 12px;
+  border-radius: 2px;
+  background: var(--header-color);
+}
+
+.contact-form-page label {
+  display: block;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.contact-form-page label span {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(247, 239, 232, 0.65);
+  font-family: "PT-Sans-Bold";
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-row {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-form-page input,
+.contact-form-page textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(247, 162, 4, 0.22);
+  border-radius: 12px;
+  background: rgba(20, 9, 6, 0.6);
+  color: #fff4e6;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form-page textarea {
+  resize: vertical;
+  min-height: 170px;
+}
+
+.contact-form-page input::placeholder,
+.contact-form-page textarea::placeholder {
+  color: rgba(247, 239, 232, 0.35);
+}
+
+.contact-form-page input:focus,
+.contact-form-page textarea:focus {
+  outline: none;
+  border-color: var(--header-color);
+  box-shadow: 0 0 0 3px rgba(247, 162, 4, 0.2);
+}
+
+.contact-submit {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 999px;
+  background: var(--header-color);
+  color: var(--main-color);
+  font-family: "PT-Sans-Bold";
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(247, 162, 4, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.contact-submit:hover {
+  background: #ffba36;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(247, 162, 4, 0.45);
+}
+
+.contact-link-tile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(247, 162, 4, 0.16);
+  border-radius: 14px;
+  background: rgba(92, 40, 29, 0.35);
+  color: #fff4e6;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.contact-link-tile:hover {
+  border-color: var(--header-color);
+  background: rgba(247, 162, 4, 0.12);
+  color: #fff4e6;
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+.contact-link-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.contact-link-icon img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.contact-link-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.contact-link-text strong {
+  display: block;
+  font-family: "PT-Sans-Bold";
+  font-size: 1.15rem;
+}
+
+.contact-link-text small {
+  color: rgba(247, 239, 232, 0.65);
+  font-size: 0.9rem;
+}
+
+.contact-link-arrow {
+  color: var(--header-color);
+  font-size: 1.4rem;
+  transition: transform 0.25s ease;
+}
+
+.contact-link-tile:hover .contact-link-arrow {
+  transform: translateX(4px);
+}
+
+.contact-card-footer {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(247, 162, 4, 0.16);
+}
+
+.contact-card-footer p {
+  margin-bottom: 8px;
+  color: rgba(247, 239, 232, 0.65);
+}
+
+.contact-secondary-link {
+  color: var(--header-color);
+  font-family: "PT-Sans-Bold";
+  text-decoration: none;
+}
+
+.contact-secondary-link:hover {
+  color: #ffba36;
+}
+
+/* Contact call to action on index.html */
+.contact-cta {
+  padding: 70px 16px;
+  background: var(--main-color);
+  text-align: center;
+}
+
+.contact-cta h2 {
+  margin-bottom: 12px;
+  color: var(--header-color);
+  font-size: 32px;
+}
+
+.contact-cta p {
+  margin-bottom: 24px;
+  color: rgba(247, 239, 232, 0.8);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 767px) {
+  .contact-intro h1 {
+    font-size: 1.9rem;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-card {
+    padding: 22px;
   }
 }
