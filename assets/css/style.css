@@ -988,27 +988,63 @@ footer {
   margin-bottom: 5rem !important;
 } 
 
+/* The one shared button style used across the site */
 .portfolio-button {
   display: inline-block;
-  padding: 20px 50px;
-  font-size: 25px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #FF9F1C;
-  border: 6px solid #FF9F1C;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  padding: 16px 46px;
   margin: 10px 0;
+  border: none;
+  border-radius: 50px;
+  background-color: #ff9f1c;
+  color: #fff;
+  font-family: "PT-Sans-Bold";
+  font-size: 22px;
+  line-height: 1.2;
+  text-transform: none;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 159, 28, 0.35);
+  transition: all 0.25s ease;
 }
 
-.portfolio-button:hover {
-  background-color: transparent;
-  color: #FF9F1C;
+.portfolio-button:hover,
+.portfolio-button:focus {
+  background-color: #ffb84d;
+  color: #fff;
   text-decoration: none;
-  transform: translateY(-9px);
-  box-shadow: 0 15px 45px rgba(255, 159, 28, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 159, 28, 0.8);
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Keep the shared look where older rules style every link in a section */
+.fh5co-home-banner a.portfolio-button,
+.contact-pop .content a.portfolio-button {
+  width: auto;
+  padding: 16px 46px;
+  margin-top: 40px;
+  text-transform: none;
+  background-color: #ff9f1c;
+  color: #fff;
+  border-radius: 50px;
+}
+
+.contact-pop .content a.portfolio-button {
+  margin-top: 20px;
+}
+
+.fh5co-home-banner a.portfolio-button:hover,
+.contact-pop .content a.portfolio-button:hover {
+  background-color: #ffb84d;
+}
+
+@media (max-width: 767px) {
+  .portfolio-button,
+  .fh5co-home-banner a.portfolio-button,
+  .contact-pop .content a.portfolio-button {
+    padding: 12px 30px;
+    font-size: 18px;
+  }
 }
 
 /* Add specific styles for portfolio banner */
@@ -1815,25 +1851,6 @@ a.case-study-secondary-btn:hover {
   color: #fff;
 }
 
-.btn-see-all-games {
-  padding: 15px 50px !important;
-  font-size: 1.3rem !important;
-  font-weight: 600;
-  margin-top: 0.5rem !important;
-  margin-bottom: 2rem !important;
-  background-color: #ff9f1c !important;
-  border-color: #ff9f1c !important;
-  color: #fff !important;
-}
-
-.btn-see-all-games:hover {
-  background-color: #ffb84d !important;
-  border-color: #ffb84d !important;
-  color: #fff !important;
-  box-shadow: 0 4px 12px rgba(255, 159, 28, 0.8) !important;
-  transform: scale(1.05);
-}
-
 @media (max-width: 768px) {
   .card-img-overlay {
     padding: 15px;
@@ -1901,37 +1918,6 @@ a.case-study-secondary-btn:hover {
   margin-top: 30px;
 }
 
-.all-games-button {
-  display: inline-block;
-  padding: 14px 44px;
-  border: 2px solid var(--header-color);
-  border-radius: 8px;
-  background-color: var(--header-color);
-  color: var(--main-color);
-  font-family: "PT-Sans-Bold";
-  font-size: 18px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.all-games-button:hover {
-  background-color: #ff9500;
-  border-color: #ff9500;
-  color: var(--main-color);
-  text-decoration: none;
-  transform: scale(1.05);
-}
-
-.all-games-button-outline {
-  background-color: transparent;
-  color: var(--header-color);
-}
-
-.all-games-button-outline:hover {
-  background-color: rgba(247, 162, 4, 0.12);
-  border-color: var(--header-color);
-  color: var(--header-color);
-}
 
 /* ============================================================
    CONTACT PAGE
@@ -2047,28 +2033,6 @@ a.case-study-secondary-btn:hover {
   outline: none;
   border-color: var(--header-color);
   box-shadow: 0 0 0 3px rgba(247, 162, 4, 0.2);
-}
-
-.contact-submit {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 12px 40px;
-  border: 4px solid #FF9F1C;
-  border-radius: 50px;
-  background-color: #FF9F1C;
-  color: #fff;
-  font-family: "PT-Sans-Bold";
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.contact-submit:hover {
-  background-color: transparent;
-  color: #FF9F1C;
-  transform: translateY(-4px);
-  box-shadow: 0 15px 45px rgba(255, 159, 28, 0.3);
 }
 
 .contact-link-tile {
