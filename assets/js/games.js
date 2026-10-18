@@ -29,7 +29,7 @@ var GAMES = {
     title: "Pull a Lucky Fish",
     category: "Simulation, Tycoon",
     image: "assets/img/PullALuckyFish.jpg",
-    visits: "37M",
+    visits: "53M",
     links: {
       play: "https://www.roblox.com/games/112781315318195/Pull-a-Lucky-Fish",
       video: "https://www.youtube.com/watch?v=Z3fYOxb-2pM"
@@ -43,7 +43,7 @@ var GAMES = {
     meta: [
       { label: "Role", value: "Game Design Consultant" },
       { label: "Focus", value: "Live Ops, Progression, Economy" },
-      { label: "Scale", value: "37M Visits" },
+      { label: "Scale", value: "53M Visits" },
       { label: "User Rating", value: "95%" }
     ]
   },
@@ -52,7 +52,7 @@ var GAMES = {
     title: "Fish Farm Sushi",
     category: "Simulation, Tycoon",
     image: "assets/img/fishFarmSushi.webp",
-    visits: "60K",
+    visits: "302K",
     links: {
       play: "https://www.roblox.com/games/133644227090327/Fish-Farm-Sushi"
     },
@@ -65,7 +65,7 @@ var GAMES = {
     meta: [
       { label: "Role", value: "Team Lead, Lead Quest & Player Experience Designer" },
       { label: "Team", value: "6 People" },
-      { label: "Scale", value: "60K Visits" },
+      { label: "Scale", value: "302K Visits" },
       { label: "User Rating", value: "95%" }
     ]
   },
@@ -74,7 +74,7 @@ var GAMES = {
     title: "ING City Season 5",
     category: "Roleplay, Casual",
     image: "assets/img/MiastoIngS05.jpg",
-    visits: "4.6M",
+    visits: "5.2M",
     links: {
       play: "https://www.roblox.com/games/8458974184/Miasto-ING-Koncert-Waksy-Aria-Martelle",
       video: "https://www.youtube.com/watch?v=Xnr2olh5120&list=PLVdeQz_6ceEt2zOkDfWMvELz5kP3kU8LZ"
@@ -146,7 +146,7 @@ var GAMES = {
     title: "Build your Sky Trails",
     category: "Builder, Sandbox",
     image: "assets/img/SkyTrails.webp",
-    visits: "1.6M",
+    visits: "1.8M",
     links: {
       play: "https://www.roblox.com/games/134671381817712/Build-your-SKY-TRAILS",
       video: "https://www.youtube.com/watch?v=IVv2vw6--SA"
