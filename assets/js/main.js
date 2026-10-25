@@ -37,161 +37,163 @@ jQuery(document).ready(function() {
     { key: 'presentation', large: 'Open Presentation', small: 'Slides' }
   ];
 
-  var OVERLAY_GRADIENT = 'background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,0.8) 100%);';
+  // Links that can be played inside the card instead of opening a new tab.
+  var VIDEO_LINK_KEYS = ['video', 'trailer', 'tutorial'];
 
   function gameLinks(game) {
     var links = [];
     $.each(LINK_TYPES, function(_, type) {
       var url = game.links && game.links[type.key];
       if (url) {
-        links.push({ url: resolveUrl(url), large: type.large, small: type.small });
+        links.push({ key: type.key, url: resolveUrl(url), large: type.large, small: type.small });
       }
     });
     return links;
   }
 
-  function linkButtons(game, size, btnClass) {
-    return gameLinks(game).map(function(link) {
-      return '<a href="' + escapeHtml(link.url) + '" class="btn btn-primary ' + btnClass + '" target="_blank">' + link[size] + '</a>';
+  function youtubeEmbed(url) {
+    var id = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/i.exec(url);
+    if (!id) return null;
+    var start = /[?&#](?:t|start)=(\d+)/.exec(url);
+    return {
+      src: 'https://www.youtube-nocookie.com/embed/' + id[1] + '?autoplay=1&rel=0&playsinline=1' + (start ? '&start=' + start[1] : ''),
+      poster: 'https://i.ytimg.com/vi/' + id[1] + '/hqdefault.jpg'
+    };
+  }
+
+  function driveEmbed(url) {
+    var id = /drive\.google\.com\/file\/d\/([\w-]+)/i.exec(url);
+    return id ? { src: 'https://drive.google.com/file/d/' + id[1] + '/preview' } : null;
+  }
+
+  // The big area at the top of a card: a looping clip, a click-to-play
+  // video, or – when the game has neither – its image.
+  function gameMedia(game) {
+    var image = game.image ? assetUrl(game.image) : '';
+    var alt = escapeHtml(game.title);
+
+    if (game.clip) {
+      var clip = escapeHtml(resolveUrl(game.clip));
+      if (/\.gif$/i.test(game.clip)) {
+        return { html: '<img class="game-media-el" src="' + clip + '" alt="' + alt + ' gameplay" loading="lazy">' };
+      }
+      return {
+        html: '<video class="game-media-el" autoplay muted loop playsinline preload="metadata"' +
+          (image ? ' poster="' + escapeHtml(image) + '"' : '') + '><source src="' + clip + '"></video>'
+      };
+    }
+
+    for (var i = 0; i < VIDEO_LINK_KEYS.length; i++) {
+      var key = VIDEO_LINK_KEYS[i];
+      var url = game.links && game.links[key];
+      var drive = url && driveEmbed(url);
+      if (drive) {
+        // Google Drive's player can't autoplay, so a poster would need two
+        // clicks. Show Drive's own player straight away instead.
+        return {
+          linkKey: key,
+          mediaClass: 'game-media--drive',
+          html: '<iframe class="game-media-el" src="' + escapeHtml(drive.src) + '" title="Video: ' + alt + '" loading="lazy"' +
+            ' allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'
+        };
+      }
+      var embed = url && youtubeEmbed(url);
+      if (embed) {
+        var poster = embed.poster || image;
+        // If the video's preview frame can't load, fall back to the game image.
+        var fallback = image && poster !== image
+          ? ' onerror="this.onerror=null;this.src=\'' + escapeHtml(image) + '\'"'
+          : '';
+        return {
+          linkKey: key,
+          html: '<button type="button" class="game-media-play" data-embed="' + escapeHtml(embed.src) + '" aria-label="Play video: ' + alt + '">' +
+            (poster ? '<img class="game-media-el" src="' + escapeHtml(poster) + '" alt="" loading="lazy"' + fallback + '>' : '<span class="game-media-el game-no-image"></span>') +
+            '<span class="game-media-icon" aria-hidden="true"></span>' +
+          '</button>'
+        };
+      }
+    }
+
+    if (image) {
+      return { usesImage: true, html: '<img class="game-media-el" src="' + escapeHtml(image) + '" alt="' + alt + '" loading="lazy">' };
+    }
+    // Games without an image get a plain cover in the site's colours.
+    return { usesImage: true, html: '<span class="game-media-el game-no-image"></span>' };
+  }
+
+  function linkButtons(game, size, skipKey) {
+    return gameLinks(game).filter(function(link) {
+      return link.key !== skipKey;
+    }).map(function(link, index) {
+      return '<a href="' + escapeHtml(link.url) + '" class="game-btn ' + (index === 0 ? 'game-btn--primary' : 'game-btn--ghost') + '" target="_blank" rel="noopener noreferrer">' + link[size] + '</a>';
     }).join('');
   }
 
-  function detailsButton(id, game, btnClass) {
+  function detailsButton(id, game) {
     if (!(game.whatIDid && game.whatIDid.length) && !game.description) {
       return '';
     }
-    return '<button type="button" class="btn btn-primary ' + btnClass + ' open-portfolio-modal" data-game-id="' + escapeHtml(id) + '">' +
+    return '<button type="button" class="game-btn game-btn--ghost open-portfolio-modal" data-game-id="' + escapeHtml(id) + '">' +
       escapeHtml(game.detailsLabel || 'What I did') + '</button>';
   }
 
-  // Games without an image get a plain cover in the site's colours.
-  function cardImage(game, style, className) {
-    if (!game.image) {
-      return '<div class="' + (className || 'card-img') + ' game-no-image" style="' + style + '"></div>';
-    }
-    return '<img class="' + (className || 'card-img') + '" src="' + escapeHtml(assetUrl(game.image)) + '" alt="' + escapeHtml(game.title) + '" style="' + style + '">';
+  function genreChips(category) {
+    return String(category || '').split(/\s*[,·]\s*/).filter(Boolean).map(function(genre) {
+      return '<span class="game-genre">' + escapeHtml(genre) + '</span>';
+    }).join('');
   }
 
-  var CARD_TEMPLATES = {
-    // index.html – Recent Games, large cards
-    'index-featured': function(id, game) {
-      return '<div class="col-lg-6 mb-4">' +
-        '<div class="card featured-game-card">' +
-          cardImage(game, 'height: 400px; object-fit: cover;') +
-          '<div class="card-img-overlay d-flex flex-column justify-content-between">' +
-            '<div class="overlay-top">' + (game.visits ? '<div class="visit-badge">' + escapeHtml(game.visits) + ' Visits</div>' : '') + '</div>' +
-            '<div class="overlay-bottom">' +
-              '<h3 class="card-title">' + escapeHtml(game.title) + '</h3>' +
-              '<p class="card-category">' + escapeHtml(game.category) + '</p>' +
-              '<div class="button-group">' + linkButtons(game, 'large', 'btn-sm') + detailsButton(id, game, 'btn-sm') + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    },
+  // size: 'lg' (featured), 'md' (all games) or 'sm' (compact grids)
+  function gameCard(id, game, size) {
+    var media = gameMedia(game);
+    var icon = game.image && !media.usesImage
+      ? '<img class="game-icon" src="' + escapeHtml(assetUrl(game.icon || game.image)) + '" alt="" loading="lazy">'
+      : '';
+    var visits = game.visits
+      ? '<div class="game-visits"><strong>' + escapeHtml(game.visits) + '</strong><span>Visits</span></div>'
+      : '';
 
-    // index.html – Recent Games, small cards
-    'index-grid': function(id, game) {
-      return '<div class="col-lg-3 mb-4">' +
-        '<div class="card game-grid-card">' +
-          cardImage(game, 'height: 216px; object-fit: cover;') +
-          '<div class="card-img-overlay d-flex flex-column justify-content-between">' +
-            '<div class="overlay-top">' + (game.visits ? '<div class="visit-badge">' + escapeHtml(game.visits) + ' Visits</div>' : '') + '</div>' +
-            '<div class="overlay-bottom">' +
-              '<h4 class="card-title">' + escapeHtml(game.title) + '</h4>' +
-              '<p class="card-category">' + escapeHtml(game.category) + '</p>' +
-              '<div class="button-group">' + linkButtons(game, 'small', 'btn-xs') + detailsButton(id, game, 'btn-xs') + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    },
+    // Order: title, visits + genres, then the video, then the buttons.
+    return '<article class="game-card game-card--' + size + '">' +
+      '<div class="game-card-top">' +
+        '<div class="game-card-head">' + icon + '<h3 class="game-card-title">' + escapeHtml(game.title) + '</h3></div>' +
+        '<div class="game-card-stats">' + visits + '<div class="game-genres">' + genreChips(game.category) + '</div></div>' +
+      '</div>' +
+      '<div class="game-media' + (media.mediaClass ? ' ' + media.mediaClass : '') + '">' + media.html + '</div>' +
+      '<div class="game-card-actions">' + linkButtons(game, size === 'lg' ? 'large' : 'small', media.linkKey) + detailsButton(id, game) + '</div>' +
+    '</article>';
+  }
 
-    // portfolio.html – large cards
-    'portfolio-featured': function(id, game) {
-      return '<div class="mb-4">' +
-        '<div class="card featured-game-card" style="position: relative; z-index: 1; border-radius: 12px; overflow: hidden;">' +
-          cardImage(game, 'height: 300px; object-fit: cover; border-radius: 12px;') +
-          '<div class="card-img-overlay d-flex flex-column justify-content-end" style="padding: 0;">' +
-            '<div style="' + OVERLAY_GRADIENT + ' padding: 15px; width: 100%;">' +
-              '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">' +
-                '<div>' +
-                  '<h3 class="card-title" style="margin-bottom: 5px;">' + escapeHtml(game.title) + '</h3>' +
-                  '<p class="card-category">' + escapeHtml(game.category) + '</p>' +
-                '</div>' +
-                (game.visits ? '<div class="visit-badge">' + escapeHtml(game.visits) + ' Visits</div>' : '') +
-              '</div>' +
-              '<div class="button-group">' + linkButtons(game, 'large', 'btn-sm') + detailsButton(id, game, 'btn-sm') + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    },
-
-    // portfolio.html – small 2x2 cards
-    'portfolio-grid': function(id, game) {
-      return '<div class="col-6 mb-3">' +
-        '<div class="card game-grid-card" style="position: relative; z-index: 1; border-radius: 8px; overflow: hidden;">' +
-          cardImage(game, 'height: 216px; object-fit: cover; border-radius: 8px;') +
-          '<div class="card-img-overlay d-flex flex-column justify-content-end" style="padding: 0;">' +
-            '<div style="' + OVERLAY_GRADIENT + ' padding: 10px; width: 100%;">' +
-              '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">' +
-                '<div>' +
-                  '<h4 class="card-title" style="margin-bottom: 3px;">' + escapeHtml(game.title) + '</h4>' +
-                  '<p class="card-category" style="font-size: 0.75rem;">' + escapeHtml(game.category) + '</p>' +
-                '</div>' +
-                (game.visits ? '<div class="visit-badge" style="font-size: 0.75rem;">' + escapeHtml(game.visits) + '</div>' : '') +
-              '</div>' +
-              '<div class="button-group">' + linkButtons(game, 'small', 'btn-xs') + detailsButton(id, game, 'btn-xs') + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    },
-
-    // all-games.html – same overlay style as the portfolio cards, 3 per row
-    'all-games': function(id, game) {
-      return '<div class="col-sm-6 col-lg-4 mb-4">' +
-        '<div class="card game-grid-card all-games-card">' +
-          cardImage(game, 'height: 250px; object-fit: cover; border-radius: 10px;') +
-          '<div class="card-img-overlay d-flex flex-column justify-content-end" style="padding: 0;">' +
-            '<div style="' + OVERLAY_GRADIENT + ' padding: 14px; width: 100%;">' +
-              '<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px;">' +
-                '<div>' +
-                  '<h4 class="card-title" style="margin-bottom: 3px;">' + escapeHtml(game.title) + '</h4>' +
-                  '<p class="card-category" style="font-size: 0.8rem;">' + escapeHtml(game.category) + '</p>' +
-                '</div>' +
-                (game.visits ? '<div class="visit-badge" style="font-size: 0.8rem;">' + escapeHtml(game.visits) + '</div>' : '') +
-              '</div>' +
-              '<div class="button-group">' + linkButtons(game, 'small', 'btn-xs') + detailsButton(id, game, 'btn-xs') + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    }
+  // data-card value -> grid columns and card size
+  var CARD_STYLES = {
+    'index-featured': { col: 'col-md-6', size: 'lg' },       // index.html – Recent Games, large cards
+    'index-grid': { col: 'col-sm-6 col-lg-3', size: 'sm' },  // index.html – Recent Games, small cards
+    'portfolio-featured': { col: 'col-12', size: 'lg' },     // portfolio.html – large cards
+    'portfolio-grid': { col: 'col-sm-6', size: 'sm' },       // portfolio.html – 2x2 cards
+    'all-games': { col: 'col-sm-6 col-lg-4', size: 'md' }    // all-games.html – 3 per row
   };
 
   var COMING_SOON_CARD =
-    '<div class="col-6 mb-3">' +
-      '<div class="card game-grid-card" style="background-color: #2d1410; display: flex; align-items: center; justify-content: center; border: 2px dashed #f7a204;">' +
-        '<div style="text-align: center; color: #f7a204;">' +
-          '<p class="mb-0" style="font-size: 2rem;">+</p>' +
-          '<p class="mb-0">Coming Soon</p>' +
-        '</div>' +
-      '</div>' +
+    '<div class="game-card game-card--soon">' +
+      '<span class="game-soon-plus">+</span>' +
+      '<span>Coming Soon</span>' +
     '</div>';
 
   $('[data-game-list]').each(function() {
     var $slot = $(this);
     var ids = GAME_LIST_DATA[$slot.data('gameList')] || [];
-    var template = CARD_TEMPLATES[$slot.data('card')];
+    var style = CARD_STYLES[$slot.data('card')];
     var fillTo = Number($slot.data('fillTo')) || 0;
     var html = '';
     var count = 0;
 
-    if (!template) {
+    if (!style) {
       console.warn('Unknown card style: ' + $slot.data('card'));
       return;
+    }
+
+    function column(content) {
+      return '<div class="' + style.col + ' mb-4 d-flex">' + content + '</div>';
     }
 
     $.each(ids, function(_, id) {
@@ -199,90 +201,83 @@ jQuery(document).ready(function() {
         console.warn('Unknown game id in GAME_LISTS: ' + id);
         return;
       }
-      html += template(id, GAME_DATA[id]);
+      html += column(gameCard(id, GAME_DATA[id], style.size));
       count++;
     });
 
     for (; count < fillTo; count++) {
-      html += COMING_SOON_CARD;
+      html += column(COMING_SOON_CARD);
     }
 
     $slot.html(html);
   });
 
-  // ------------------------------------------------------------
-  // Carousels (only on pages that load owl.carousel)
-  // ------------------------------------------------------------
-  if ($.fn.owlCarousel) {
-    $('.owl-carousel2').owlCarousel({
-      loop: true,
-      center: false,
-      margin: 20,
-      responsiveClass: true,
-      nav: true,
-      responsive: {
-        0: {
-          items: 2,
-          nav: false
-        },
-        600: {
-          items: 2,
-          nav: false
-        },
-        1000: {
-          items: 4,
-          nav: true,
-          loop: true
-        }
-      }
-    });
+  // Google Drive's player hides its play button in small frames, so it is
+  // always laid out at DRIVE_PLAYER_WIDTH and scaled down to fit the card.
+  var DRIVE_PLAYER_WIDTH = 480;
 
-    $('.owl-carousel3').owlCarousel({
-      loop: true,
-      center: false,
-      margin: 20,
-      responsiveClass: true,
-      nav: true,
-      responsive: {
-        0: {
-          items: 1,
-          nav: false
-        },
-        600: {
-          items: 2,
-          nav: false
-        },
-        1000: {
-          items: 3,
-          nav: true,
-          loop: true
-        }
-      }
-    });
-
-    $('.owl-carousel4').owlCarousel({
-      loop: true,
-      center: false,
-      margin: 20,
-      responsiveClass: true,
-      nav: true,
-      responsive: {
-        0: {
-          items: 1,
-          nav: false
-        },
-        600: {
-          items: 2,
-          nav: false
-        },
-        1000: {
-          items: 2,
-          nav: true,
-          loop: true
-        }
+  function fitDrivePlayers() {
+    $('.game-media--drive').each(function() {
+      var width = this.clientWidth;
+      var $frame = $(this).children('iframe');
+      if (!width || width >= DRIVE_PLAYER_WIDTH) {
+        $frame.css({ width: '', height: '', transform: '' });
+      } else {
+        $frame.css({
+          width: DRIVE_PLAYER_WIDTH + 'px',
+          height: (DRIVE_PLAYER_WIDTH * 9 / 16) + 'px',
+          transform: 'scale(' + (width / DRIVE_PLAYER_WIDTH) + ')'
+        });
       }
     });
   }
+
+  fitDrivePlayers();
+  $(window).on('resize', fitDrivePlayers);
+
+  // Skills & Tools tabs (portfolio.html)
+  var $skillTabs = $('.skill-tab');
+  var $skillTabList = $('.skill-tabs');
+
+  function selectSkillTab($tab, focus) {
+    var wasStuck = $skillTabList.length && $skillTabList[0].getBoundingClientRect().top <= 1;
+
+    $skillTabs.attr({ 'aria-selected': 'false', tabindex: '-1' });
+    $tab.attr({ 'aria-selected': 'true', tabindex: '0' });
+    $('.skill-panel').attr('hidden', 'hidden');
+    var $panel = $('#' + $tab.attr('aria-controls')).removeAttr('hidden');
+
+    // When the sticky tab bar is pinned mid-list, jump to the top of the new panel.
+    if (wasStuck) {
+      window.scrollTo(0, $panel.offset().top - $skillTabList.outerHeight() - 12);
+    }
+    if (focus) {
+      $tab.trigger('focus');
+    }
+  }
+
+  $skillTabs.on('click', function() {
+    selectSkillTab($(this));
+  });
+
+  // Arrow keys / Home / End move between tabs.
+  $skillTabs.on('keydown', function(e) {
+    var index = $skillTabs.index(this);
+    var count = $skillTabs.length;
+    var target = { 37: index - 1, 39: index + 1, 36: 0, 35: count - 1 }[e.which];
+    if (target === undefined) return;
+    e.preventDefault();
+    selectSkillTab($skillTabs.eq((target + count) % count), true);
+  });
+
+  // Swap the video poster for the real player on click.
+  $(document).on('click', '.game-media-play', function() {
+    var $button = $(this);
+    $button.replaceWith(
+      '<iframe class="game-media-el" src="' + escapeHtml($button.data('embed')) + '" title="' + escapeHtml($button.attr('aria-label')) + '"' +
+      ' allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'
+    );
+  });
 
   // ------------------------------------------------------------
   // "What I did" pop-up
@@ -349,20 +344,6 @@ jQuery(document).ready(function() {
     };
   }
 
-  // Skill cards (Game Design carousel etc.) keep their text in data-description.
-  function studyFromCard($card) {
-    var text = String($card.data('description') || '');
-    var paragraphs = text.split(/\n\s*\n/).map(function(block) {
-      return $.trim(block.split('\n').map($.trim).filter(Boolean).join('\n'));
-    }).filter(Boolean);
-
-    return {
-      title: $.trim($card.find('.card-title').first().text()),
-      category: $.trim($card.find('.card-category, .card-text').first().text()),
-      paragraphs: paragraphs
-    };
-  }
-
   $(document).on('click', '.open-portfolio-modal', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -371,10 +352,6 @@ jQuery(document).ready(function() {
     if (game) {
       renderModal(studyFromGame(game));
     }
-  });
-
-  $('.portfolio-card').on('click', function() {
-    renderModal(studyFromCard($(this)));
   });
 });
 

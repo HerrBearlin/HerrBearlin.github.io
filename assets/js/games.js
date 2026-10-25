@@ -9,9 +9,17 @@
      category     – genre tags under the title
      image        – path from the site root, e.g. "assets/img/x.png"
                     (leave out to show a plain placeholder cover)
-     visits       – e.g. "37M" (leave out to hide the visits badge)
+                    – shown as a small icon on the card; it only fills the
+                    big media area when the game has no video
+     icon         – optional square icon to use instead of the image
+     clip         – optional looping .mp4/.webm or .gif from the site root,
+                    e.g. "assets/video/x.mp4"; autoplays (muted) in the
+                    card's big media area
+     visits       – e.g. "37M" (leave out to hide the visits count)
      links        – any of: play, video, trailer, tutorial, info, presentation
                     (web addresses or paths from the site root)
+                    A YouTube or Google Drive video/trailer/tutorial link is
+                    embedded in the card as the big click-to-play video.
      description  – intro text shown at the top of the pop-up
                     (one string, or a list of strings for several paragraphs)
      whatIDid     – bullet points in the pop-up; the "What I did" button
@@ -32,7 +40,7 @@ var GAMES = {
     visits: "53M",
     links: {
       play: "https://www.roblox.com/games/112781315318195/Pull-a-Lucky-Fish",
-      video: "https://www.youtube.com/watch?v=Z3fYOxb-2pM"
+      video: "https://drive.google.com/file/d/1EA9Hn496YB6tiLq-5fb6QrFhxd2Pu-7b/view?usp=sharing"
     },
     description: "Simulation game where players catch fish and manage their own fishing island.",
     whatIDid: [
@@ -54,7 +62,8 @@ var GAMES = {
     image: "assets/img/fishFarmSushi.webp",
     visits: "302K",
     links: {
-      play: "https://www.roblox.com/games/133644227090327/Fish-Farm-Sushi"
+      play: "https://www.roblox.com/games/133644227090327/Fish-Farm-Sushi",
+      video: "https://drive.google.com/file/d/1YE9YT_HQ0EIc4jNNypTg1WPy-O5qVOuW/view"
     },
     whatIDid: [
       "Led a team of 6 to develop and publish the game.",
@@ -231,7 +240,10 @@ var GAMES = {
   'virtual-vibes': {
     title: "Virtual Vibes",
     category: "Digital Festival, Game Event",
-    image: "assets/img/VirtualVibes.jfif"
+    image: "assets/img/VirtualVibes.jfif",
+    links: {
+      video: "https://www.youtube.com/watch?v=kgSNje62cM4"
+    }
   },
 
   /* ---------- Non-commercial ---------- */

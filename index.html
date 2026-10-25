@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
+  <link rel="stylesheet" href="assets/css/style.css?v=23">
   <title>Jan 'Bearlin' Malicki - Portfolio</title>
   <style>
     .typewriter-text {
@@ -25,14 +25,18 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md  fixed-top maine-menu">
+  <!-- Navigation (same on every page) -->
+  <nav class="navbar navbar-expand-md fixed-top maine-menu">
     <div class="container">
-      <button class="navbar-toggler ml-auto" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse"> <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button>
+      <button class="navbar-toggler ml-auto" type="button" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span>
+      </button>
       <div id="my-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item active"> <a class="nav-link" href="#">Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="pages/portfolio.html" tabindex="-1" aria-disabled="true">Portfolio</a></li>
+          <li class="nav-item active"> <a class="nav-link" href="index.html" aria-current="page">About Me</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/portfolio.html">Portfolio</a></li>
           <li class="nav-item"> <a class="nav-link" href="pages/contact.html">Contact</a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/all-games.html">All Games</a></li>
         </ul>
       </div>
     </div>
@@ -103,117 +107,63 @@
       </div>
 
       <!-- RECENT GAMES SECTION -->
-      <div class="container recent" id="activity">
-        <div class="row">
-          <h2>Recent Games</h2>
-          
-          <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentCommercial...) -->
-          <!-- Featured Games - Top 2 -->
-          <div class="row mb-2" data-game-list="recentCommercialFeatured" data-card="index-featured"></div>
+      <div class="container recent recent-games" id="activity">
+        <h2>Recent Games</h2>
 
-          <!-- Grid of 4 Games -->
-          <div class="row mb-4" data-game-list="recentCommercialGrid" data-card="index-grid"></div>
-          
-          <!-- See All Games Button -->
-          <div class="row justify-content-center w-100">
-            <div class="text-center">
-              <a href="pages/all-games.html" class="portfolio-button">See All My Games</a>
-            </div>
-          </div>
+        <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentCommercial...) -->
+        <!-- Featured Games - Top 2 -->
+        <div class="row" data-game-list="recentCommercialFeatured" data-card="index-featured"></div>
+
+        <!-- Grid of 4 Games -->
+        <div class="row" data-game-list="recentCommercialGrid" data-card="index-grid"></div>
+
+        <!-- Buttons under Recent Games -->
+        <div class="section-actions">
+          <a href="pages/all-games.html" class="portfolio-button">See All My Games</a>
+          <a href="pages/portfolio.html" class="portfolio-button portfolio-button--outline">Portfolio &amp; Skills</a>
         </div>
       </div>
     </div>
-
-<div class="container-fluid recent fh5co-portfolio" id="portfolio">
-  <div class="container text-center"> 
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <a href="pages/portfolio.html" class="portfolio-button">View Full Portfolio & Skills Here</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- HOBBY SECTION -->
     <div class="container-fluid recent fh5co-portfolio" id="hobbies">
       <div class="container">
-        <h2>Hobbies & Interests</h2>
-        <div class="row">
-          <div class="bx bx-1">
-            <div class="card hover-effect"> <img class="card-img" src="assets/img/RPGPortfolio.jpg" alt="" style="height:300px; width: 300px; object-fit: cover;">
-              <div class="card-img-overlay"> <a href="#"></a>
-                <div class="bottom-text">
-                  <h5 class="card-title">Tabletop RPG</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bx bx-2">
-            <div class="card hover-effect"> <img class="card-img" src="assets/img/Kadr_z_Filmu_bear2.png" alt="" style="height:300px; width: 300px; object-fit: cover;">
-              <div class="card-img-overlay"> <a href="#"></a>
-                <div class="bottom-text">
-                  <h5 class="card-title">LARPs</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bx bx-3">
-            <div class="card hover-effect"> <img class="card-img" src="assets/img/kendo.jpg" alt=""style="height:300px; width: 300px; object-fit: cover;">
-              <div class="card-img-overlay"> <a href="#"></a>
-                <div class="bottom-text">
-                  <h5 class="card-title">Martial Arts</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bx bx-middle" style="padding: 0;">
-            <div class="bx bx-5">
-              <div class="card hover-effect"> <img class="card-img" src="assets/img/cooking.jpg" alt=""  style="height:300px; width: 300px; object-fit: cover;">
-                <div class="card-img-overlay"> <a href="#"></a>
-                  <div class="bottom-text">
-                    <h5 class="card-title">Cooking & Baking</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bx bx-6">
-              <div class="card hover-effect"> <img class="card-img" src="assets/img/travelling.jpg" alt="" style="height:300px; width: 300px; object-fit: cover;">
-                <div class="card-img-overlay"> <a href="#"></a>
-                  <div class="bottom-text">
-                    <h5 class="card-title">Languages & Travel</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bx bx-7">
-              <div class="card hover-effect"> <img class="card-img" src="assets/img/music.jpg" alt="" style="height:300px; width: 300px; object-fit: cover;">
-                <div class="card-img-overlay"> <a href="#"></a>
-                  <div class="bottom-text">
-                    <h5 class="card-title">Music & Composing</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bx bx-8">
-              <div class="card hover-effect"> <img class="card-img" src="assets/img/movieMaking.jfif" alt="" style="height:300px; width: 300px; object-fit: cover;">
-                <div class="card-img-overlay"> <a href="#"></a>
-                  <div class="bottom-text">
-                    <h5 class="card-title">Moviemaking & video-editing</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bx bx-9">
-              <div class="card hover-effect"> <img class="card-img" src="assets/img/bear.jpg" alt="" style="height:300px; width: 300px; object-fit: cover;">
-                <div class="card-img-overlay"> <a href="#"></a>
-                  <div class="bottom-text">
-                    <h5 class="card-title">Bears</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <h2>Hobbies &amp; Interests</h2>
+        <!-- One <figure> per hobby; the grid keeps every tile the same size -->
+        <div class="hobby-grid">
+          <figure class="hobby-tile">
+            <img src="assets/img/RPGPortfolio.jpg" alt="" loading="lazy">
+            <figcaption>Tabletop RPG</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/Kadr_z_Filmu_bear2.png" alt="" loading="lazy">
+            <figcaption>LARPs</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/kendo.jpg" alt="" loading="lazy">
+            <figcaption>Martial Arts</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/cooking.jpg" alt="" loading="lazy">
+            <figcaption>Cooking &amp; Baking</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/travelling.jpg" alt="" loading="lazy">
+            <figcaption>Languages &amp; Travel</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/music.jpg" alt="" loading="lazy">
+            <figcaption>Music &amp; Composing</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/movieMaking.jfif" alt="" loading="lazy">
+            <figcaption>Moviemaking &amp; Video Editing</figcaption>
+          </figure>
+          <figure class="hobby-tile">
+            <img src="assets/img/bear.jpg" alt="" loading="lazy">
+            <figcaption>Bears</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -256,9 +206,8 @@
   <script src="assets/js/jquery-3.3.1.slim.min.js"></script> 
   <script src="assets/js/popper.min.js" ></script> 
   <script src="assets/js/bootstrap.min.js"></script> 
-  <script src="assets/js/owl.carousel.min.js"></script> 
-  <script src="assets/js/games.js?v=3"></script>
-  <script src="assets/js/main.js?v=3"></script>
+  <script src="assets/js/games.js?v=23"></script>
+  <script src="assets/js/main.js?v=23"></script>
   <script>
     const roles = ["Game Designer", "Game Producer"];
     let currentRoleIndex = 0;

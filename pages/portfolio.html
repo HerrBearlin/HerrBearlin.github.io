@@ -4,22 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css?v=3">
+  <link rel="stylesheet" href="../assets/css/style.css?v=23">
   <title>Portfolio - Jan 'Bearlin' Malicki</title>
 </head>
 
 <body>
-  <!-- Navigation -->
+  <!-- Navigation (same on every page) -->
   <nav class="navbar navbar-expand-md fixed-top maine-menu">
     <div class="container">
-      <button class="navbar-toggler ml-auto" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse">
+      <button class="navbar-toggler ml-auto" type="button" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span>
       </button>
       <div id="my-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="../index.html">About Me</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#tools">Tools</a></li>        
+          <li class="nav-item"> <a class="nav-link" href="../index.html">About Me</a></li>
+          <li class="nav-item active"> <a class="nav-link" href="portfolio.html" aria-current="page">Portfolio</a></li>
           <li class="nav-item"> <a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"> <a class="nav-link" href="all-games.html">All Games</a></li>
         </ul>
       </div>
     </div>
@@ -36,407 +37,495 @@
   </div>
 
   <!-- COMMERCIAL AND NON-COMMERCIAL RELEASES -->
-  <div class="container-fluid" style="padding: 0;">
-    <div class="row" style="gap: 0; margin: 0;">
+  <div class="container-fluid releases">
+    <div class="releases-grid">
       <!-- COMMERCIAL SECTION -->
-      <div class="col-lg-6" style="background-color: #381812; padding: 60px 20px 60px 60px; border-right: 4px solid #f7a204; min-height: 100%; display: flex; justify-content: flex-end;">
-        <div style="padding: 0 30px; width: 75%;">
-          <h2 style="color: #f7a204; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #f7a204;">
-            <span style="display: inline-block; width: 10px; height: 30px; background-color: #f7a204; margin-right: 10px; vertical-align: middle;"></span>
-            Recent Commercial
-          </h2>
-          
-          <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentCommercial...) -->
-          <div data-game-list="recentCommercialFeatured" data-card="portfolio-featured"></div>
+      <section class="releases-col releases-col--commercial">
+        <h2 class="all-games-heading">
+          <span class="all-games-accent"></span>
+          Recent Commercial
+        </h2>
 
-          <!-- Commercial Grid 2x2 -->
-          <div class="row mb-4" data-game-list="recentCommercialGrid" data-card="portfolio-grid"></div>
-        </div>
-      </div>
+        <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentCommercial...) -->
+        <div class="row" data-game-list="recentCommercialFeatured" data-card="portfolio-featured"></div>
+
+        <!-- Commercial Grid 2x2 -->
+        <div class="row" data-game-list="recentCommercialGrid" data-card="portfolio-grid"></div>
+      </section>
       <!-- NON-COMMERCIAL SECTION -->
-      <div class="col-lg-6" style="background-color: #381812; padding: 60px 60px 60px 20px; min-height: 100%; display: flex; justify-content: flex-start;">
-        <div style="padding: 0 30px; width: 75%;">
-          <h2 style="color: #f7a204; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #f7a204;">
-            <span style="display: inline-block; width: 10px; height: 30px; background-color: #f7a204; margin-right: 10px; vertical-align: middle;"></span>
-            Recent Non-Commercial
-            <img src="../assets/img/creativecommonsNonCommercial.png" alt="Non-Commercial" style="height: 30px; width: auto; margin-left: 15px; vertical-align: middle; display: inline-block;">
-          </h2>
-          <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentNonCommercial...) -->
-          <div data-game-list="recentNonCommercialFeatured" data-card="portfolio-featured"></div>
+      <section class="releases-col">
+        <h2 class="all-games-heading">
+          <span class="all-games-accent"></span>
+          Recent Non-Commercial
+          <img class="releases-cc" src="../assets/img/creativecommonsNonCommercial.png" alt="Non-Commercial">
+        </h2>
+        <!-- Cards are generated from assets/js/games.js (GAME_LISTS.recentNonCommercial...) -->
+        <div class="row" data-game-list="recentNonCommercialFeatured" data-card="portfolio-featured"></div>
 
-          <!-- Non-Commercial Grid 2x2 (empty slots become "Coming Soon") -->
-          <div class="row mb-4" data-game-list="recentNonCommercialGrid" data-card="portfolio-grid" data-fill-to="3"></div>
-        </div>
-      </div>
+        <!-- Non-Commercial Grid 2x2 (empty slots become "Coming Soon") -->
+        <div class="row" data-game-list="recentNonCommercialGrid" data-card="portfolio-grid" data-fill-to="3"></div>
+      </section>
     </div>
-  </div>
 
-  <!-- SEE OTHER GAMES BUTTON -->
-  <div class="container-fluid" style="background-color: #381812; padding: 40px 0 0 0; text-align: center;">
-    <a href="all-games.html" class="portfolio-button">See All My Games</a>
-  </div>
-
-<!-- Game Design Portfolio -->
-<div class="container-fluid fh5co-recent-work">
-  <div class="container recent">
-    <div class="row">
-      <h2>Game Design</h2> 
-      <div class="owl-carousel owl-carousel2 owl-theme">
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description="I create easy to read and comprehensive Game Design Documents (GDDs) for game development. Combining narrative expertise, gameplay mechanics, and UX/UI principles to create clear, actionable documentation that aligns development teams.
-             In my GDDs I focus on:
-
-             1)Creating sketches and wireframes for game mechanics and interfaces. 
-             2)Collecting feedback on the game document, so it can be improved and tailored to the needs of different teams/departments
-             3)Providing the documentation in a format that is easy to read and understand for all team members.
-             4)Updating the documentation as the game development progresses, so it remains relevant and useful for the team.
-             
-             ">
-          <img class="card-img" src="../assets/img/GDD.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Documentation</h5>
-              <p class="card-text">GDD, Concepts, Structures  </p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I design engaging and well-structured gameplay and level concepts that enhance player experience while aligning with the game's vision. 
-            By combining narrative depth, game mechanics, and UX principles, I create immersive and interactive game worlds.
-            In my concept work, I focus on:
-
-            1)Showcasing the game's core design, ensuring balance and player engagement.
-            2)Showcasing needed materials for other team members to grasp the game's vision.
-            3)Ensuring synergy between narrative, mechanics, and level layout, so that the game world feels immersive and meaningful.
-            ">
-          <img class="card-img" src="../assets/img/Concept_Work.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Concept Work</h5>
-              <p class="card-text">Gameplay/Level Concepts</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I design compelling and structured game showcases that effectively present a game's vision, mechanics, and unique features. 
-            I create presentations that engage both players and stakeholders.
-            In my showcase work, I focus on:
-
-            1)Structuring presentations to highlight key game features, mechanics, and unique selling points in a clear and engaging way.
-            2)Creating visual materials, including gameplay flowcharts, UI mockups, and level overviews, to support the presentation.
-            3)Tailoring for different audiences, whether for investors, publishers, or players, ensuring the right level of detail and engagement.
-            ">
-          <img class="card-img" src="../assets/img/projectChronosConcept.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Game Showcase</h5>
-              <p class="card-text">Presentation, Ideas</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I analyze game data and player feedback to provide actionable insights that improve game design, balance, and overall player experience. By combining statistical analysis with qualitative research, I help refine mechanics, optimize engagement, and enhance retention.
-            In my analytics work, I focus on:
-            
-            1)Examining in-game st  atistics, player behavior, and performance metrics to identify trends and areas for improvement.
-            2)Analyzing player feedback from reviews, surveys, and community discussions to understand player expectations and frustrations.
-            3)Creating clear, data-driven reports with visualizations and key takeaways to support decision-making for designers and developers.
-            4)Iterating and refining game mechanics, difficulty curves, and user experience based on analytical findings and feedback loops.">
-          <img class="card-img" src="../assets/img/gameReviewAnalysis.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Game Analysis</h5>
-              <p class="card-text">Analytics, Feedback</p>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Game Production Portfolio -->
-<div class="container-fluid fh5co-recent-work">
-  <div class="container recent">
-    <div class="row">
-      <h2>Production & Team Management</h2> 
-      <div class="owl-carousel owl-carousel2 owl-theme">
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description="I design clear and efficient production pipelines that keep game development on schedule while balancing creativity and technical execution. 
-             By aligning teams and resources, I ensure a smooth workflow from concept to release.
-             In my production planning, I focus on:
-             
-             1)Aligning team goals and expectations with project milestones and deadlines.
-             2)Structuring development stages, from pre-production and prototyping to full production, testing, and launch.
-             3)Managing resources and team coordination, ensuring tasks are distributed efficiently and adjusted as development evolves.
-             4)Handling risks and contingencies, adapting to changes and challenges while maintaining project scope and quality.">
-          <img class="card-img" src="../assets/img/productTimeline.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text"> 
-              <h5 class="card-title">Process Planning</h5>
-              <p class="card-text">Scheduling, Resources, Tasks</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I ensure that development teams work efficiently and collaboratively by fostering clear communication, aligning goals, and maintaining a structured workflow. 
-            I am familiar with Agile, Prince2 and Waterfall methodologies (as well as some of their hybrids and subtypes).
-            By keeping everyone on the same page, I help create a productive and motivated team environment.
-            In my team leadership, I focus on:
-            
-            1)Coordinating team meetings to align expectations, track progress, and address blockers.
-            2)Facilitating retrospectives to review completed work, gather feedback, and improve.
-            3)Encouraging open communication and problem-solving, so that all team members feel heard and supported..
-            ">
-          <img class="card-img" src="../assets/img/retrospectiveAndTeamLeading.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Team Leading</h5>
-              <p class="card-text">Conflict Resolution, Leading</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I use structured prioritization methods, like MoSCoW, to ensure that development efforts are focused. 
-            This allows teams to balance ambition (very big thing to address) with feasibility.
-            In my prioritisation work, I focus on:
-
-            1)Defining must-have vs. nice-to-have features, ensuring core gameplay and narrative elements are delivered first.
-            2)Managing scope creep, making sure additions and changes fit within the available time and resources.
-            3)Aligning priorities with project goals, so that development efforts contribute to a strong and cohesive game experience.">
-          <img class="card-img" src="../assets/img/MOSCoW.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Feature Prioritisation</h5>
-              <p class="card-text">Features, Tasks, TODO</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I ensure clear and engaging communication across all stages of development, from internal team meetings to investor pitches. 
-            Leading discussions, presenting ideas, or facilitating brainstorming sessions, I can speak and I speak well.
-            In my work, I focus on:
-
-            1)Keeping my audience engaged and informed, using clear language and visuals to convey complex ideas.
-            2)Cracking a joke or two, to make sure that the presentation is not only informative but also entertaining.
-            3)Creating brainstorming sessions, encouraging creative input while keeping discussions productive.
-            4)Leading team meetings or actively participating in team meetings, ensuring everyone is informed, aligned, and ready for the next steps.">
-          <img class="card-img" src="../assets/img/presentation.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Presentation & Communication</h5>
-              <p class="card-text">Public Speaking, Presenting</p>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-<!-- Narrative Design Portfolio -->
-<div class="container-fluid fh5co-recent-work">
-  <div class="container recent">
-    <div class="row">
-      <h2>Narrative & Quest Design</h2> 
-      <div class="owl-carousel owl-carousel2 owl-theme">
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description="I create detailed and easy-to-understand relationship maps that visualize connections between characters, scenes, locations, and key items. These maps help structure narratives, ensuring a cohesive and immersive storytelling experience.
-             In my relationship mapping, I focus on:
-
-              1)Defining clear relationships between characters as well as their goals and hidden motivations.
-              2)Mapping out how different locations and environments influence the story and interact with key events.
-              3)Establishing item significance, tracking objects of power, lore artifacts, and player-driven tools.
-              4)Ensuring flexibility and depth, allowing the story and ideas to evolve dynamically while maintaining coherence.
-             ">
-          <img class="card-img" src="../assets/img/narrativeCharacters.jfif" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text"> 
-              <h5 class="card-title">Relationship Map</h5>
-              <p class="card-text">Relationships, Big Concept</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I design level narratives that guide players through engaging environments, 
-            ensuring that story, mechanics, and exploration work together seamlessly. 
-            Each area tells its own story, enriching world-building and deepening player engagement.
-            In my level narrative work, I focus on:
-
-            1)Player Flow & Storytelling Through Design – Structuring levels to naturally lead players through key story beats, environmental storytelling, and character interactions.
-            2)Environmental Lore & Atmosphere – Crafting areas with history, cultural depth, and a lived-in feel that reflects the game’s overarching themes.
-            3)Interactive Storytelling Elements – Integrating dialogue, objects, and world details that reward exploration and player curiosity.
-            4)Pacing & Emotional Impact – Adjusting the rhythm of gameplay to balance action, discovery, and storytelling moments for maximum engagement.
-
-            ">
-          <img class="card-img" src="../assets/img/Narrative-Level.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Level Narrative</h5>
-              <p class="card-text">Player Flow, Area Lore</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I write engaging and world-fitting dialogue that brings characters to life and keeps players invested in the story. 
-            Every conversation is designed to reflect the game’s tone and create memorable interactions.
-            In my dialogue writing, I focus on:
-
-            1)Writing dialogue that players want to follow, balancing clarity, artism of the text and text length.
-            2)Creating distinct characters with unique personalities, ensuring characters shine through their speech patterns & vocabulary.
-            3)Adapting the dialogue to the game’s genre, from lighthearted and casual to dark and unsettling.
-            ">
-          <img class="card-img" src="../assets/img/DialogiTreflandia.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Dialogue Writing</h5>
-              <p class="card-text">Script Writing, Dialogue Flow</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I write clear text that helps players navigate the game effortlessly while keeping them immersed in its world. 
-            Every menu, button, and tooltip description should feel intuitive and natural to the game’s tone.
-            In my UI writing, I focus on:
-            
-            1)Creating simple, easy-to-understand text that guides players without overwhelming them.
-            2)Keeping the wording consistent with the game’s style. Whether it’s formal, playful, mysterious, or action-packed, it can be written well.
-            3)Making tooltips and descriptions informative but concise, so players get the details they need at a glance.
-            4)Ensuring accessibility and readability, avoiding unnecessary words and keeping instructions clear.">
-          <img class="card-img" src="../assets/img/characterDescription.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Menu & UI</h5>
-              <p class="card-text">Descriptions, Inspects</p>
-            </div>
-          </div>
-        </div>
-        <div class="card portfolio-card" data-toggle="modal" data-target="#portfolioModal" 
-             data-description=
-            "I write clear text that helps players navigate the game effortlessly while keeping them immersed in its world. 
-            Every menu, button, and tooltip description should feel intuitive and natural to the game’s tone.
-            In my UI writing, I focus on:
-            
-            1)Creating simple, easy-to-understand text that guides players without overwhelming them.
-            2)Keeping the wording consistent with the game’s style. Whether it’s formal, playful, mysterious, or action-packed, it can be written well.
-            3)Making tooltips and descriptions informative but concise, so players get the details they need at a glance.
-            4)Ensuring accessibility and readability, avoiding unnecessary words and keeping instructions clear.">
-          <img class="card-img" src="../assets/img/itemDescription.png" alt="" style="height: 300px; object-fit: cover;">
-          <div class="card-img-overlay">
-            <div class="bottom-text">
-              <h5 class="card-title">Item Descriptions</h5>
-              <p class="card-text">Items, Props, Environment</p>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-  <!-- DISCLAIMER SECTION -->
-  <div class="container-fluid" style="background-color: #381812; padding: 60px;">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-      <h3 style="color: #f7a204; margin-bottom: 20px; text-align: center; font-size: 24px; font-weight: bold;">
-        <span style="display: inline-block; width: 10px; height: 30px; background-color: #f7a204; margin-right: 15px; vertical-align: middle;"></span>
-        Important Note
-      </h3>
-      <p style="color: #d3cfd1; font-size: 16px; line-height: 1.8; text-align: center; margin: 0;">
-        Due to internal confidentiality agreements, I cannot share most screenshots of documentation, game pitches, or concept materials created for commercial projects. The visuals shown here represent only a portion of my work and do not fully reflect the scope of my design, documentation, and pitching experience.
-      </p>
+    <!-- SEE OTHER GAMES BUTTON -->
+    <div class="releases-actions">
+      <a href="all-games.html" class="portfolio-button">See All My Games</a>
     </div>
   </div>
 
   <!-- ============================================================
-       TOOLS SECTION – HOW TO SORT
+       SKILLS & TOOLS – HOW TO EDIT
        ============================================================
-       Each tool is a <div class="tool-card"> block.
-       To move a tool to a different tier, simply CUT the whole
-       <div class="tool-card">…</div> block and PASTE it inside
-       the desired tier's <div class="row justify-content-center tools-grid"> container.
-
-       The three tiers are marked with comments:
-         TIER: ADVANCED        (~line 450)
-         TIER: INTERMEDIATE    (~line 470)
-         TIER: BEGINNER        (~line 490)
+       One tab per discipline (Design / Production / Technical).
+       Each tab panel has two boxes – Skills and Tools & Applications –
+       each with Advanced / Intermediate / Beginner levels.
+         • A skill is one <li>…</li> line in <ul class="skill-list">.
+           Wrap it in <strong>…</strong> to show it in bold.
+         • A tool is one <li>…</li> line in <ul class="tool-chips">,
+           inside a named <div class="tool-group">:
+             <li><span class="tool-icon"><img src="../assets/img/Logos/FILE" alt=""></span><span class="tool-label">Name</span></li>
+           No logo yet? Put 2–3 letters in the icon instead:
+             <li><span class="tool-icon tool-icon--text" aria-hidden="true">AB</span><span class="tool-label">Name</span></li>
+       CUT and PASTE a line to move it to another level or tab.
+       The tab that opens first is the one WITHOUT "hidden" on its
+       panel and with aria-selected="true" on its button.
        ============================================================ -->
-
-  <!-- Skills Section -->
-  <div class="container-fluid recent fh5co-portfolio" id="tools">
+  <div class="container-fluid recent fh5co-portfolio skills-section" id="skills">
     <div class="container">
-      <h2>Tools & Applications</h2>
+      <h2>Skills &amp; Tools</h2>
 
-      <!-- ── TIER: ADVANCED ───────────────────────────────────────
-           Move tool-card blocks here to mark them as Advanced.
-      ──────────────────────────────────────────────────────────── -->
-      <div class="skill-tier">
-        <div class="skill-tier-header">
-          <span class="skill-tier-label advanced">Advanced</span>
-        </div>
-        <div class="row justify-content-center tools-grid">
-          <div class="tool-card"><img src="../assets/img/Logos/Unitypng.png" alt="Unity" title="Unity"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/robloxStudio.png" alt="Roblox Studio" title="Roblox Studio"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/notion.jfif" alt="Notion" title="Notion"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/FimgaLogo.png" alt="Figma" title="Figma"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/gsuite.png" alt="Google Suite" title="Google Suite"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/miro.jfif" alt="Miro" title="Miro"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/jira.png" alt="Jira" title="Jira"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/clickup.png" alt="ClickUp" title="ClickUp"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/trello.png" alt="Trello" title="Trello"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/officelogo.png" alt="Microsoft Office" title="Microsoft Office"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/milanote.png" alt="Milanote" title="Milanote"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/kumu.png" alt="Kumu" title="Kumu"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/PowerBI.png" alt="Power BI" title="Power BI"></div>
+      <div class="skill-tabs" role="tablist" aria-label="Choose a discipline">
+        <button type="button" class="skill-tab" role="tab" id="tab-production" aria-controls="panel-production" aria-selected="true">Production</button>
+        <button type="button" class="skill-tab" role="tab" id="tab-design" aria-controls="panel-design" aria-selected="false" tabindex="-1">Design</button>
+        <button type="button" class="skill-tab" role="tab" id="tab-technical" aria-controls="panel-technical" aria-selected="false" tabindex="-1">Technical</button>
+      </div>
+
+      <!-- ── DESIGN ──────────────────────────────────────────── -->
+      <div class="skill-panel" id="panel-design" role="tabpanel" aria-labelledby="tab-design" hidden>
+        <div class="skills-grid skills-grid--pair">
+          <section class="skill-group">
+            <h3 class="skill-group-title">Skills</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <ul class="skill-list">
+                <li><strong>Quest Design &amp; Game Design</strong></li>
+                <li><strong>Documentation Writing (GDDs)</strong></li>
+                <li><strong>Technical Design &amp; Game Logic</strong></li>
+                <li><strong>Data-Informed Design (KPIs &amp; Metrics)</strong></li>
+                <li>Pitching Designs &amp; Presentations</li>
+                <li>In-Game Writing &amp; Copywriting</li>
+                <li>Core Loop, Progression &amp; Live Ops</li>
+                <li>Player Experience &amp; Game Feel</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <ul class="skill-list">
+                <li><strong>Narrative Design</strong></li>
+                <li>UX/UI Design in Quests</li>
+                <li>Visual Scripting (Blueprints)</li>
+                <li>In-Game Economy &amp; Monetisation</li>
+                <li>Game Balancing &amp; A/B Testing</li>
+                <li>Level Narrative &amp; World Building</li>
+                <li>Wireframes &amp; UI Mockups</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <ul class="skill-list">
+                <li>Multi-Genre Design</li>
+                <li>Optimising Game Systems &amp; Flows</li>
+                <li>Quest Implementation in RedKit</li>
+                <li>Pixel Art &amp; Character Animation</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="skill-group">
+            <h3 class="skill-group-title">Tools &amp; Applications</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unitypng.png" alt=""></span><span class="tool-label">Unity</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/robloxStudio.png" alt=""></span><span class="tool-label">Roblox Studio</span></li>
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">QE</span><span class="tool-label">Quest Editors</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Boards &amp; diagrams</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/miro.jfif" alt=""></span><span class="tool-label">Miro</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/milanote.png" alt=""></span><span class="tool-label">Milanote</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/kumu.png" alt=""></span><span class="tool-label">Kumu</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/lucidchartlogo.png" alt=""></span><span class="tool-label">Lucidchart</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Writing &amp; presenting</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/gsuite.png" alt=""></span><span class="tool-label">Google Docs</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/officelogo.png" alt=""></span><span class="tool-label">Microsoft Word</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/officelogo.png" alt=""></span><span class="tool-label">PowerPoint</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Engine 5</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Engine Blueprints</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">UI &amp; visual design</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/FimgaLogo.png" alt=""></span><span class="tool-label">Figma</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Canva.png" alt=""></span><span class="tool-label">Canva</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">RK</span><span class="tool-label">RedKit (RedEngine)</span></li>
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">DE</span><span class="tool-label">Divinity Engine</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/godot.png" alt=""></span><span class="tool-label">Godot</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">3D &amp; art</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/blender.png" alt=""></span><span class="tool-label">Blender</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/krita.png" alt=""></span><span class="tool-label">Krita</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/gimp.png" alt=""></span><span class="tool-label">GIMP</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Video &amp; audio</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/davinci.jfif" alt=""></span><span class="tool-label">DaVinci Resolve</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/audacity.webp" alt=""></span><span class="tool-label">Audacity</span></li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
-      <!-- ── TIER: INTERMEDIATE ────────────────────────────────────
-           Move tool-card blocks here to mark them as Intermediate.
-      ──────────────────────────────────────────────────────────── -->
-      <div class="skill-tier">
-        <div class="skill-tier-header">
-          <span class="skill-tier-label intermediate">Intermediate</span>
-        </div>
-        <div class="row justify-content-center tools-grid">
-          <div class="tool-card"><img src="../assets/img/Logos/Unreal.png" alt="Unreal Engine" title="Unreal Engine"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/visualStudio.png" alt="Visual Studio" title="Visual Studio"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/audacity.webp" alt="Audacity" title="Audacity"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/Canva.png" alt="Canva" title="Canva"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/github.png" alt="GitHub" title="GitHub"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/gitlab.png" alt="GitLab" title="GitLab"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/docker.webp" alt="Docker" title="Docker"></div>
+      <!-- ── PRODUCTION ──────────────────────────────────────────── -->
+      <div class="skill-panel" id="panel-production" role="tabpanel" aria-labelledby="tab-production">
+        <div class="skills-grid skills-grid--pair">
+          <section class="skill-group">
+            <h3 class="skill-group-title">Skills</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <ul class="skill-list">
+                <li><strong>Technical Production &amp; Cross-Project Coordination</strong></li>
+                <li><strong>Backlog, Task Tracking &amp; Prioritisation</strong></li>
+                <li><strong>Planning, Scheduling &amp; Dependencies</strong></li>
+                <li><strong>Cross-Functional Team Coordination</strong></li>
+                <li>Stakeholder Communication &amp; Requirements</li>
+                <li>Project Documentation &amp; Delivery Tracking</li>
+                <li>Feedback &amp; Cross-Team Communication</li>
+                <li>Presentations &amp; Public Speaking</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <ul class="skill-list">
+                <li><strong>Agile Workflows &amp; Team Routines</strong></li>
+                <li>Production Scoping &amp; Scheduling</li>
+                <li>Workflow &amp; Process Optimisation</li>
+                <li>Issue Tracking &amp; Quality Metrics</li>
+                <li>Risk &amp; Contingency Management</li>
+                <li>Retrospectives &amp; Feedback Loops</li>
+                <li>Client Feedback &amp; Approvals</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <ul class="skill-list">
+                <li>AAA Development Pipeline</li>
+                <li>Project Budgeting</li>
+                <li>Legal &amp; Financial Project Management</li>
+                <li>Trailer &amp; Promo Production</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="skill-group">
+            <h3 class="skill-group-title">Tools &amp; Applications</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unitypng.png" alt=""></span><span class="tool-label">Unity</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/robloxStudio.png" alt=""></span><span class="tool-label">Roblox Studio</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Task tracking</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/jira.png" alt=""></span><span class="tool-label">Jira</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/clickup.png" alt=""></span><span class="tool-label">ClickUp</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/trello.png" alt=""></span><span class="tool-label">Trello</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Documentation</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/logoconfluenc.png" alt=""></span><span class="tool-label">Confluence</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/notion.jfif" alt=""></span><span class="tool-label">Notion</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Communication</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/slack_logo_icon_170727.webp" alt=""></span><span class="tool-label">Slack</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Microsoft_Office_Teams_(2025–present).svg.webp" alt=""></span><span class="tool-label">Microsoft Teams</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Office suites</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/gsuite.png" alt=""></span><span class="tool-label">Google Workspace</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/officelogo.png" alt=""></span><span class="tool-label">Microsoft Office</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Engine 5</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Version control</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Git-logo.svg.webp" alt=""></span><span class="tool-label">Git</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/github.png" alt=""></span><span class="tool-label">GitHub</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/gitlab.png" alt=""></span><span class="tool-label">GitLab</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/forklogo.png" alt=""></span><span class="tool-label">Fork</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">CI/CD &amp; builds</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/docker.webp" alt=""></span><span class="tool-label">Docker</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/jenkins.jfif" alt=""></span><span class="tool-label">Jenkins</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">RK</span><span class="tool-label">RedKit (RedEngine)</span></li>
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">DE</span><span class="tool-label">Divinity Engine</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/godot.png" alt=""></span><span class="tool-label">Godot</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">AI assistants</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Claude_AI_symbol.svg.webp" alt=""></span><span class="tool-label">Claude</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/OpenAIAPI.jpg" alt=""></span><span class="tool-label">OpenAI API</span></li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
-      <!-- ── TIER: BEGINNER / LEARNING ─────────────────────────────
-           Move tool-card blocks here to mark them as Beginner.
-      ──────────────────────────────────────────────────────────── -->
-      <div class="skill-tier">
-        <div class="skill-tier-header">
-          <span class="skill-tier-label beginner">Beginner / Learning</span>
-        </div>
-        <div class="row justify-content-center tools-grid">
-          <div class="tool-card" title="RedKit (The Witcher 3)"><span style="color: #b0120a; font-weight: bold; font-size: 14px; text-align: center; line-height: 1.1;">Red<br>Kit</span></div>
-          <div class="tool-card"><img src="../assets/img/Logos/godot.png" alt="Godot" title="Godot"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/blender.png" alt="Blender" title="Blender"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/krita.png" alt="Krita" title="Krita"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/gimp.png" alt="GIMP" title="GIMP"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/davinci.jfif" alt="DaVinci Resolve" title="DaVinci Resolve"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/GCP.jpg" alt="GCP" title="GCP"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/AWS.png" alt="AWS" title="AWS"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/jenkins.jfif" alt="Jenkins" title="Jenkins"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/OpenAIAPI.jpg" alt="OpenAI API" title="OpenAI API"></div>
-          <div class="tool-card"><img src="../assets/img/Logos/Tableau.png" alt="Tableau" title="Tableau"></div>
+      <!-- ── TECHNICAL ──────────────────────────────────────────── -->
+      <div class="skill-panel" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical" hidden>
+        <div class="skills-grid skills-grid--pair">
+          <section class="skill-group">
+            <h3 class="skill-group-title">Skills</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <ul class="skill-list">
+                <li><strong>Data Analysis &amp; Player Behaviour Analysis</strong></li>
+                <li><strong>Data-Driven Decisions (KPIs &amp; Metrics)</strong></li>
+                <li><strong>SQL &amp; Database Querying</strong></li>
+                <li><strong>Data Reporting &amp; Dashboard Creation</strong></li>
+                <li>Database Design (DBMS, ORM)</li>
+                <li>Process &amp; System Modelling (UML, BPMN)</li>
+                <li>Prototyping (Roblox Studio, Unity)</li>
+                <li>Scripting (C#, Java, Luau)</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <ul class="skill-list">
+                <li><strong>Python Programming (Pandas, NumPy)</strong></li>
+                <li>Programming &amp; Content Implementation</li>
+                <li>Code Management &amp; CI/CD Pipelines</li>
+                <li>Software Dev &amp; Integration Workflows</li>
+                <li>Data Pipelines &amp; Reporting Support</li>
+                <li>Version Control (Git, GitHub, GitLab)</li>
+                <li>Database Programming</li>
+              </ul>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <ul class="skill-list">
+                <li>Cloud-Based Development (AWS, GCP)</li>
+                <li>Automation &amp; Development Tooling</li>
+                <li>AI Assistants &amp; Automation</li>
+                <li>Performance Profiling</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="skill-group">
+            <h3 class="skill-group-title">Tools &amp; Applications</h3>
+
+            <div class="skill-level">
+              <span class="skill-tier-label advanced">Advanced</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unitypng.png" alt=""></span><span class="tool-label">Unity</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/robloxStudio.png" alt=""></span><span class="tool-label">Roblox Studio</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Languages</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Python-logo-notext.svg.webp" alt=""></span><span class="tool-label">Python</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Csharp_Logo.png" alt=""></span><span class="tool-label">C#</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/java_logo.png" alt=""></span><span class="tool-label">Java</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Luau_Logo.webp" alt=""></span><span class="tool-label">Luau</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Databases</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/SQL_LOGO.svg" alt=""></span><span class="tool-label">SQL</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/mysqlLogo.png" alt=""></span><span class="tool-label">MySQL</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Postgresql_elephant.svg.webp" alt=""></span><span class="tool-label">PostgreSQL</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/microsoft-sql-server-logo.png" alt=""></span><span class="tool-label">Microsoft SQL Server</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Data &amp; BI</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/PowerBI.png" alt=""></span><span class="tool-label">Power BI</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Tableau.png" alt=""></span><span class="tool-label">Tableau</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Microsoft_Office_Excel_(2025–present).svg.webp" alt=""><img src="../assets/img/Logos/Google_Sheets_Logo_05.2026.png" alt=""></span><span class="tool-label">Excel &amp; Google Sheets</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Modelling</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/UML_logo.svg.webp" alt=""></span><span class="tool-label">UML</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/orm_logo.png" alt=""></span><span class="tool-label">ORM</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Bizagi_BPMN_logo.webp" alt=""></span><span class="tool-label">BPMN (Bizagi)</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/dbms_logo.png" alt=""></span><span class="tool-label">DBMS</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label intermediate">Intermediate</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Engine 5</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Engine Blueprints</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Languages &amp; IDEs</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/ISO_C++_Logo.svg.webp" alt=""></span><span class="tool-label">C++</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/visualStudio.png" alt=""></span><span class="tool-label">Visual Studio</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Python data stack</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/NumpyLogo.png" alt=""></span><span class="tool-label">NumPy</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Pandaslogo.png" alt=""></span><span class="tool-label">Pandas</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/matplotlib_logo.jpg" alt=""></span><span class="tool-label">Matplotlib</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/seaborn_logo.png" alt=""></span><span class="tool-label">Seaborn</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/scikitlearn_logo.png" alt=""></span><span class="tool-label">scikit-learn</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/streamlit_logo.png" alt=""></span><span class="tool-label">Streamlit</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <span class="skill-tier-label beginner">Beginner / Growing</span>
+              <div class="tool-group">
+                <span class="tool-group-name">Game engines</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">RK</span><span class="tool-label">RedKit (RedEngine)</span></li>
+                  <li><span class="tool-icon tool-icon--text" aria-hidden="true">DE</span><span class="tool-label">Divinity Engine</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/godot.png" alt=""></span><span class="tool-label">Godot</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Cloud</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/AWS.png" alt=""></span><span class="tool-label">AWS</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/GCP.jpg" alt=""></span><span class="tool-label">Google Cloud (GCP)</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/google_bigquery_logo_icon_168150.webp" alt=""></span><span class="tool-label">BigQuery</span></li>
+                </ul>
+              </div>
+              <div class="tool-group">
+                <span class="tool-group-name">Profiling &amp; GPU</span>
+                <ul class="tool-chips">
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unreal.png" alt=""></span><span class="tool-label">Unreal Insights</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/Unitypng.png" alt=""></span><span class="tool-label">Unity Profiler</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/robloxStudio.png" alt=""></span><span class="tool-label">Roblox MicroProfiler</span></li>
+                  <li><span class="tool-icon"><img src="../assets/img/Logos/nvidia_cuda_logo.png" alt=""></span><span class="tool-label">NVIDIA CUDA</span></li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- DISCLAIMER SECTION -->
+  <div class="container-fluid portfolio-note">
+    <div class="container">
+      <h3>
+        <span class="all-games-accent"></span>
+        Important Note
+      </h3>
+      <p>
+        Due to internal confidentiality agreements, I cannot share most screenshots of documentation, game pitches, or concept materials created for commercial projects. The visuals shown here represent only a portion of my work and do not fully reflect the scope of my design, documentation, and pitching experience.
+      </p>
     </div>
   </div>
 
@@ -476,9 +565,8 @@
   <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
-  <script src="../assets/js/owl.carousel.min.js"></script>
-  <script src="../assets/js/games.js?v=3"></script>
-  <script src="../assets/js/main.js?v=3"></script>
+  <script src="../assets/js/games.js?v=23"></script>
+  <script src="../assets/js/main.js?v=23"></script>
 </body>
 
 
